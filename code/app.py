@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import Api 
 from flask_jwt import JWT
@@ -11,7 +12,7 @@ from database import db
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') ## Uses SQLliet if environment variable not found
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False ## Turns of Flask Modification tracker - we use the SQL Alchemy Tracker instead as its better
 
 app.secret_key = 'niall'
